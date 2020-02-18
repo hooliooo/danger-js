@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -35,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var BitBucketCloudGit_1 = require("../BitBucketCloudGit");
 var BitBucketCloud_1 = require("../../BitBucketCloud");
@@ -52,7 +52,7 @@ var loadFixture = function (path) {
         .replace(/\r/g, "");
 };
 /** Returns JSON from the fixtured dir */
-exports.requestWithFixturedJSON = function (path) { return __awaiter(void 0, void 0, void 0, function () {
+exports.requestWithFixturedJSON = function (path) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         return [2 /*return*/, function () {
                 return Promise.resolve(JSON.parse(loadFixture(path)));
@@ -62,7 +62,7 @@ exports.requestWithFixturedJSON = function (path) { return __awaiter(void 0, voi
     });
 }); };
 /** Returns arbitrary text value from a request */
-exports.requestWithFixturedContent = function (path) { return __awaiter(void 0, void 0, void 0, function () {
+exports.requestWithFixturedContent = function (path) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         return [2 /*return*/, function () {
                 return Promise.resolve(loadFixture(path));
@@ -89,8 +89,9 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
     var gitJSONDSL = {};
     var bbcDSL = {};
     var gitDSL = {};
-    beforeEach(function () { return __awaiter(void 0, void 0, void 0, function () {
+    beforeEach(function () { return __awaiter(_this, void 0, void 0, function () {
         var api, _a, _b, _c, _d, _e;
+        var _this = this;
         return __generator(this, function (_f) {
             switch (_f.label) {
                 case 0:
@@ -121,7 +122,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
                     return [4 /*yield*/, exports.requestWithFixturedContent("bitbucket_cloud_diff.diff")];
                 case 5:
                     _e.getPullRequestDiff = _f.sent();
-                    api.getFileContents = function (path, repoSlug, ref) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+                    api.getFileContents = function (path, repoSlug, ref) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
                         return [2 /*return*/, JSON.stringify({ path: path, repoSlug: repoSlug, ref: ref })];
                     }); }); };
                     return [4 /*yield*/, bbc.getPlatformGitRepresentation()];
@@ -135,7 +136,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("sets the modified/created/deleted", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("sets the modified/created/deleted", function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             expect(gitJSONDSL.modified_files).toEqual([
                 "CHANGELOG.md",
@@ -164,7 +165,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             return [2 /*return*/];
         });
     }); });
-    it("shows the diff for a specific file", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("shows the diff for a specific file", function () { return __awaiter(_this, void 0, void 0, function () {
         var diff;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -176,7 +177,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("should include `before` text content of the file", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should include `before` text content of the file", function () { return __awaiter(_this, void 0, void 0, function () {
         var before;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -188,7 +189,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("should include `after` text content of the file", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should include `after` text content of the file", function () { return __awaiter(_this, void 0, void 0, function () {
         var after;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -200,7 +201,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("should include `added` text content of the file", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should include `added` text content of the file", function () { return __awaiter(_this, void 0, void 0, function () {
         var added;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -212,7 +213,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("should include `removed` text content of the file", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should include `removed` text content of the file", function () { return __awaiter(_this, void 0, void 0, function () {
         var removed;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -224,7 +225,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("resolves to `null` for files not in modified_files", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("resolves to `null` for files not in modified_files", function () { return __awaiter(_this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -236,7 +237,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("shows the structured diff for a specific file", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("shows the structured diff for a specific file", function () { return __awaiter(_this, void 0, void 0, function () {
         var chunks;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -248,7 +249,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("sets up commit data correctly", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("sets up commit data correctly", function () { return __awaiter(_this, void 0, void 0, function () {
         var exampleCommit;
         return __generator(this, function (_a) {
             exampleCommit = {
@@ -272,7 +273,7 @@ describe("the dangerfile gitDSL - BitBucket Cloud", function () {
             return [2 /*return*/];
         });
     }); });
-    it("writes a JSON DSL fixture", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("writes a JSON DSL fixture", function () { return __awaiter(_this, void 0, void 0, function () {
         var fakeSource, dataSent;
         return __generator(this, function (_a) {
             switch (_a.label) {

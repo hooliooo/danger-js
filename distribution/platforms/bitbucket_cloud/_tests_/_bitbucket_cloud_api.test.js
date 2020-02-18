@@ -11,11 +11,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -46,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var BitBucketCloudAPI_1 = require("../BitBucketCloudAPI");
 var bitbucketCloudTemplate_1 = require("../../../runner/templates/bitbucketCloudTemplate");
@@ -84,7 +84,7 @@ describe("API testing - BitBucket Cloud", function () {
     beforeEach(function () {
         api = APIFactory("username", "password", "{1234-1234-1234-1234}");
     });
-    it("getPullRequestsFromBranch", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getPullRequestsFromBranch", function () { return __awaiter(_this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -99,7 +99,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getPullRequestInfo", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getPullRequestInfo", function () { return __awaiter(_this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -114,7 +114,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getPullRequestCommits", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getPullRequestCommits", function () { return __awaiter(_this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -129,7 +129,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("should not fetch commits on the second time", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should not fetch commits on the second time", function () { return __awaiter(_this, void 0, void 0, function () {
         var mockJsonResult, result2;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -148,7 +148,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getPullRequestDiff", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getPullRequestDiff", function () { return __awaiter(_this, void 0, void 0, function () {
         var text;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -166,7 +166,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getFileContents", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getFileContents", function () { return __awaiter(_this, void 0, void 0, function () {
         var text;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -184,7 +184,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getPullRequestComments", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getPullRequestComments", function () { return __awaiter(_this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -200,7 +200,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getDangerInlineComments", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getDangerInlineComments", function () { return __awaiter(_this, void 0, void 0, function () {
         var comments;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -233,7 +233,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getPullRequestActivities", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getPullRequestActivities", function () { return __awaiter(_this, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -248,7 +248,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("getDangerComments", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("getDangerComments", function () { return __awaiter(_this, void 0, void 0, function () {
         var commitID, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -296,7 +296,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("postBuildStatus", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("postBuildStatus", function () { return __awaiter(_this, void 0, void 0, function () {
         var payload;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -316,7 +316,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("postPRComment", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("postPRComment", function () { return __awaiter(_this, void 0, void 0, function () {
         var comment;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -334,7 +334,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("deleteComment", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("deleteComment", function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, api.deleteComment("1")];
@@ -345,7 +345,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("updateComment", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("updateComment", function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, api.updateComment("1", "Hello!")];
@@ -360,7 +360,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("postInlinePRComment", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("postInlinePRComment", function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, api.postInlinePRComment("comment...", 5, "dangerfile.ts")];
@@ -375,7 +375,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("should fetch accessToken", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("should fetch accessToken", function () { return __awaiter(_this, void 0, void 0, function () {
         var isFetchedToken, fetch, expectedAuthBody, expectedAuthHeaders, expectedOAUTHRequestHeaders, result, firstCalledBody;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -429,7 +429,7 @@ describe("API testing - BitBucket Cloud", function () {
             }
         });
     }); });
-    it("shouldn't fetch accessToken if it exists", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("shouldn't fetch accessToken if it exists", function () { return __awaiter(_this, void 0, void 0, function () {
         var expectedOAUTHRequestHeaders, result;
         return __generator(this, function (_a) {
             switch (_a.label) {

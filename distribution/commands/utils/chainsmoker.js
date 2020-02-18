@@ -30,7 +30,7 @@ function chainsmoker(keyedPaths) {
         });
     }
     function finalize(keyedPaths) {
-        return __assign(__assign({}, lodash_mapvalues_1.default(keyedPaths, function (paths) { return paths.length > 0; })), { getKeyedPaths: function () { return keyedPaths; } });
+        return __assign({}, lodash_mapvalues_1.default(keyedPaths, function (paths) { return paths.length > 0; }), { getKeyedPaths: function () { return keyedPaths; } });
     }
     return function () {
         var patterns = [];

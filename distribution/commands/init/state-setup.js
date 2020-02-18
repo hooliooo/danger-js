@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -45,6 +44,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var readline_sync_1 = __importDefault(require("readline-sync"));
 var supports_hyperlinks_1 = __importDefault(require("supports-hyperlinks"));
@@ -64,7 +64,7 @@ exports.createUI = function (state, app) {
         header: function (msg) { return say(chalk_1.default.bold("\n## " + msg + "\n")); },
         command: function (command) { return say("> " + chalk_1.default.white.bold(command) + " \n"); },
         link: function (name, href) { return linkToUse(name, href); },
-        pause: function (secs) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+        pause: function (secs) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, new Promise(function (done) { return timers_1.setTimeout(done, secs * 1000); })];
         }); }); },
         waitForReturn: function () { return (app.impatient ? Promise.resolve() : readline_sync_1.default.question("\n↵ ")); },

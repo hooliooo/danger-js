@@ -17,7 +17,7 @@ var LocalRepo = /** @class */ (function () {
             repo: process.cwd(),
             pr: undefined,
         };
-        this.env = __assign(__assign({}, env), defaults);
+        this.env = __assign({}, env, defaults);
     }
     Object.defineProperty(LocalRepo.prototype, "name", {
         get: function () {

@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -35,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = require("path");
 var DangerUtils_1 = require("../../runner/DangerUtils");
@@ -70,7 +70,7 @@ var utils = function (pr, api) {
     };
 };
 /** Generates the fileContents function, needed so that Peril can re-create this func for an event */
-exports.fileContentsGenerator = function (api, defaultRepoSlug, defaultRef) { return function (path, repoSlug, ref) { return __awaiter(void 0, void 0, void 0, function () {
+exports.fileContentsGenerator = function (api, defaultRepoSlug, defaultRef) { return function (path, repoSlug, ref) { return __awaiter(_this, void 0, void 0, function () {
     var opts, response, buffer, _a;
     return __generator(this, function (_b) {
         switch (_b.label) {
@@ -113,7 +113,7 @@ exports.fileContentsGenerator = function (api, defaultRepoSlug, defaultRef) { re
     });
 }); }; };
 /** Generates the createUpdatedIssueWithID function, needed so that Peril can re-create this func for an event */
-exports.createUpdatedIssueWithIDGenerator = function (api) { return function (id, content, settings) { return __awaiter(void 0, void 0, void 0, function () {
+exports.createUpdatedIssueWithIDGenerator = function (api) { return function (id, content, settings) { return __awaiter(_this, void 0, void 0, function () {
     var uniqueHeader, q, searchResults, body, repo, owner, title, state, issueToUpdate, issue, issue;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -141,7 +141,7 @@ exports.createUpdatedIssueWithIDGenerator = function (api) { return function (id
         }
     });
 }); }; };
-exports.createOrUpdatePR = function (pr, api) { return function (config, fileMap) { return __awaiter(void 0, void 0, void 0, function () {
+exports.createOrUpdatePR = function (pr, api) { return function (config, fileMap) { return __awaiter(_this, void 0, void 0, function () {
     var repo, owner, branchSettings, prs, existingPR;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -194,7 +194,7 @@ exports.createOrUpdatePR = function (pr, api) { return function (config, fileMap
         }
     });
 }); }; };
-exports.createOrAddLabel = function (pr, api) { return function (labelConfig, repoConfig) { return __awaiter(void 0, void 0, void 0, function () {
+exports.createOrAddLabel = function (pr, api) { return function (labelConfig, repoConfig) { return __awaiter(_this, void 0, void 0, function () {
     var config, label, existingLabels, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {

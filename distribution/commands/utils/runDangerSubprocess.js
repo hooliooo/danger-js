@@ -11,11 +11,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -46,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var debug_1 = require("../../debug");
 var path_1 = require("path");
@@ -75,7 +75,7 @@ exports.runDangerSubprocess = function (subprocessName, dslJSON, exec, config) {
     var processDisplayName = path_1.basename(processName);
     var dslJSONString = exports.prepareDangerDSL(dslJSON);
     d("Running sub-process: " + processDisplayName + " - " + args);
-    var child = child_process_1.spawn(processName, args, { env: __assign(__assign({}, process.env), config.additionalEnvVars) });
+    var child = child_process_1.spawn(processName, args, { env: __assign({}, process.env, config.additionalEnvVars) });
     var sendDSLToSubprocess = function () {
         if (exec.options.passURLForDSL) {
             var resultsPath = path_1.join(os_1.tmpdir(), "danger-dsl.json");
@@ -96,7 +96,7 @@ exports.runDangerSubprocess = function (subprocessName, dslJSON, exec, config) {
     // Initial sending of the DSL
     sendDSLToSubprocess();
     var allLogs = "";
-    child.stdout.on("data", function (data) { return __awaiter(void 0, void 0, void 0, function () {
+    child.stdout.on("data", function (data) { return __awaiter(_this, void 0, void 0, function () {
         var stdout, maybeJSON, maybeJSONURL, withoutURLs, url;
         return __generator(this, function (_a) {
             stdout = data.toString();
@@ -138,7 +138,7 @@ exports.runDangerSubprocess = function (subprocessName, dslJSON, exec, config) {
             console.log(data.toString());
         }
     });
-    child.on("close", function (code) { return __awaiter(void 0, void 0, void 0, function () {
+    child.on("close", function (code) { return __awaiter(_this, void 0, void 0, function () {
         var failResults, danger;
         return __generator(this, function (_a) {
             switch (_a.label) {

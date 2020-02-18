@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -35,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var debug_1 = require("../../../debug");
 var d = debug_1.debug("GitHub::Issue");
@@ -85,13 +85,13 @@ exports.GitHubIssueCommenter = function (api) {
          * Fails the current build, if status setting succeeds
          * then return true.
          */
-        updateStatus: function (passed, message, url, dangerID) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+        updateStatus: function (passed, message, url, dangerID) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, api.updateStatus(passed, message, url, dangerID)];
         }); }); },
         /**
          * Gets inline comments for current PR
          */
-        getInlineComments: function (dangerID) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+        getInlineComments: function (dangerID) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, api.getPullRequestInlineComments(dangerID)];
         }); }); },
         /**
@@ -130,7 +130,7 @@ exports.GitHubIssueCommenter = function (api) {
          *
          * @returns {Promise<boolean>} did it work?
          */
-        deleteMainComment: function (dangerID) { return __awaiter(void 0, void 0, void 0, function () {
+        deleteMainComment: function (dangerID) { return __awaiter(_this, void 0, void 0, function () {
             var commentIDs, _i, commentIDs_1, commentID;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -160,7 +160,7 @@ exports.GitHubIssueCommenter = function (api) {
          *
          * @returns {Promise<boolean>} did it work?
          */
-        deleteInlineComment: function (id) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
+        deleteInlineComment: function (id) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, api.deleteInlineCommentWithID(id)];
         }); }); },
         /**
@@ -169,7 +169,7 @@ exports.GitHubIssueCommenter = function (api) {
          * @param {string} newComment string value of comment
          * @returns {Promise<boolean>} success of posting comment
          */
-        updateOrCreateComment: function (dangerID, newComment) { return __awaiter(void 0, void 0, void 0, function () {
+        updateOrCreateComment: function (dangerID, newComment) { return __awaiter(_this, void 0, void 0, function () {
             var commentIDs, issue, _i, commentIDs_2, commentID;
             return __generator(this, function (_a) {
                 switch (_a.label) {

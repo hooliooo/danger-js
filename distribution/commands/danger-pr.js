@@ -12,11 +12,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -126,7 +125,7 @@ else {
                     d("executing dangerfile at " + fileUtils_1.dangerfilePath(commander_1.default));
                 }
                 var source = new Fake_1.FakeCI({ DANGER_TEST_REPO: pr.repo, DANGER_TEST_PR: pr.pullRequestNumber });
-                var platform = platform_1.getPlatformForEnv(__assign(__assign({}, process.env), { 
+                var platform = platform_1.getPlatformForEnv(__assign({}, process.env, { 
                     // Inject a platform hint, its up to getPlatformForEnv to decide if the environment is suitable for the
                     // requested platform. Because we have a URL we can determine with greater accuracy what platform that the
                     // user is attempting to test. This complexity is required because danger-pr defaults to using

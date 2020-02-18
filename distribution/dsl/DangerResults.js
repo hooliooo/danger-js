@@ -1,12 +1,5 @@
 "use strict";
 // Please don't have includes in here that aren't inside the DSL folder, or the d.ts/flow defs break
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var Violation_1 = require("../dsl/Violation");
 /// End of Danger DSL definition
@@ -152,10 +145,10 @@ function sortResults(results) {
 exports.sortResults = sortResults;
 exports.emptyResults = function () { return ({ fails: [], markdowns: [], warnings: [], messages: [] }); };
 exports.isEmptyResults = function (results) {
-    return __spreadArrays(results.fails, results.warnings, results.messages, results.markdowns).length === 0;
+    return results.fails.concat(results.warnings, results.messages, results.markdowns).length === 0;
 };
 exports.isMarkdownOnlyResults = function (results) {
-    return results.markdowns.length > 0 && __spreadArrays(results.fails, results.warnings, results.messages).length === 0;
+    return results.markdowns.length > 0 && results.fails.concat(results.warnings, results.messages).length === 0;
 };
 function resultsIntoInlineResults(results) {
     // Here we iterate through all keys ("fails", "warnings", "messages", "markdowns") and for each violation

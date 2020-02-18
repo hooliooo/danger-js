@@ -11,11 +11,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -49,6 +48,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var GitHubUtils_1 = __importDefault(require("./github/GitHubUtils"));
 var GitHubGit_1 = __importDefault(require("./github/GitHubGit"));
@@ -78,7 +78,7 @@ function GitHub(api) {
             }
         });
     }); };
-    return __assign(__assign(__assign({ name: "GitHub", api: api, getReviewInfo: api.getPullRequestInfo, getPlatformGitRepresentation: function () { return GitHubGit_1.default(api); }, getPlatformReviewDSLRepresentation: function () { return __awaiter(_this, void 0, void 0, function () {
+    return __assign({ name: "GitHub", api: api, getReviewInfo: api.getPullRequestInfo, getPlatformGitRepresentation: function () { return GitHubGit_1.default(api); }, getPlatformReviewDSLRepresentation: function () { return __awaiter(_this, void 0, void 0, function () {
             var pr, _a, issue, commits, reviews, requested_reviewers, thisPR;
             return __generator(this, function (_b) {
                 switch (_b.label) {
@@ -119,19 +119,19 @@ function GitHub(api) {
         // When there's an event we don't need any of ^
         getPlatformReviewSimpleRepresentation: function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, ({})];
-        }); }); } }, issueCommenter_1.GitHubIssueCommenter(api)), (checksCommenter_1.GitHubChecksCommenter(api) || {})), { getFileContents: api.fileContents, executeRuntimeEnvironment: executeRuntimeEnvironment });
+        }); }); } }, issueCommenter_1.GitHubIssueCommenter(api), (checksCommenter_1.GitHubChecksCommenter(api) || {}), { getFileContents: api.fileContents, executeRuntimeEnvironment: executeRuntimeEnvironment });
 }
 exports.GitHub = GitHub;
 // This class should get un-classed, but for now we can expand by functions
 exports.githubJSONToGitHubDSL = function (gh, api) {
-    return __assign(__assign({}, gh), { api: api, utils: GitHubUtils_1.default(gh.pr, api) });
+    return __assign({}, gh, { api: api, utils: GitHubUtils_1.default(gh.pr, api) });
 };
 var override_require_1 = __importDefault(require("override-require"));
 var customGitHubRequire_1 = require("./github/customGitHubRequire");
 var fs_1 = require("fs");
 var cleanDangerfile_1 = __importDefault(require("../runner/runners/utils/cleanDangerfile"));
 var transpiler_1 = __importDefault(require("../runner/runners/utils/transpiler"));
-var executeRuntimeEnvironment = function (start, dangerfilePath, environment) { return __awaiter(void 0, void 0, void 0, function () {
+var executeRuntimeEnvironment = function (start, dangerfilePath, environment) { return __awaiter(_this, void 0, void 0, function () {
     var token, restoreOriginalModuleLoader, path, content, rep, msg, dangerfileContent, msg, newDangerfile, defaultExport;
     return __generator(this, function (_a) {
         switch (_a.label) {

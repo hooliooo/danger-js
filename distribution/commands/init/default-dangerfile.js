@@ -53,7 +53,7 @@ exports.formatDangerfile = function (dangerfile, dangerfileState) {
         var localPrettier = fs.existsSync("package.json") && JSON.parse(fs.readFileSync("package.json", "utf8")).prettier;
         // Always include this
         var always = { editorconfig: true };
-        var settings = localPrettier ? __assign(__assign({}, always), localPrettier) : always;
+        var settings = localPrettier ? __assign({}, always, localPrettier) : always;
         return format(dangerfile, settings);
     }
     else {

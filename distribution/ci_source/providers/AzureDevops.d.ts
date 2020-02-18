@@ -1,13 +1,13 @@
-import { Env, CISource } from "../ci_source";
+import { Env, CISource } from "../ci_source"
 export declare class AzureDevops implements CISource {
-    private readonly env;
-    constructor(env: Env);
-    get name(): string;
-    get isCI(): boolean;
-    get isPR(): boolean;
-    get repoSlug(): string;
-    get pullRequestID(): string;
-    get commitHash(): string;
-    get ciRunURL(): string;
-    get useEventDSL(): boolean;
+  private readonly env
+  constructor(env: Env)
+  readonly name: string
+  readonly isCI: boolean
+  readonly isPR: boolean
+  readonly repoSlug: string
+  readonly pullRequestID: string
+  readonly commitHash: string
+  readonly ciRunURL: string
+  readonly useEventDSL: boolean
 }

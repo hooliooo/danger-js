@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -35,16 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var require_from_string_1 = __importDefault(require("require-from-string"));
 var cleanDangerfile_1 = __importDefault(require("../../runner/runners/utils/cleanDangerfile"));
@@ -62,7 +55,7 @@ exports.dangerRepresentationForPath = function (value) {
     var hasManySlashes = value.split("/").length > 2;
     var _a = hasManySlashes
         ? value.split("@")[0].split("/")
-        : __spreadArrays([undefined, undefined], value.split("@")[0].split("/")), owner = _a[0], repo = _a[1], pathComponents = _a.slice(2);
+        : [undefined, undefined].concat(value.split("@")[0].split("/")), owner = _a[0], repo = _a[1], pathComponents = _a.slice(2);
     return {
         branch: value.includes("@") ? value.split("@")[1] : "master",
         dangerfilePath: pathComponents.join("/"),
@@ -133,7 +126,7 @@ exports.shouldUseGitHubOverride = function (request, parent) {
 // We want to handle relative imports inside a Dangerfile, this custom version of the require func
 // returns a Promise instead of the normal object, and so you would use `await require("./thing")`
 // Which TypeScript handles just as you'd expect
-exports.customGitHubResolveRequest = function (token) { return function (request, parent) { return __awaiter(void 0, void 0, void 0, function () {
+exports.customGitHubResolveRequest = function (token) { return function (request, parent) { return __awaiter(_this, void 0, void 0, function () {
     var prefixLessParent, dangerRep, localPath, extensions, _i, extensions_1, ext, newReferenceString, newRep, dangerfileContent, newPerilFileReference, newDangerfile, transpiled;
     return __generator(this, function (_a) {
         switch (_a.label) {

@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -35,10 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var interfaces_1 = require("./interfaces");
 var common_setup_1 = require("./common-setup");
-exports.setupUnknownRepoProvider = function (ui) { return __awaiter(void 0, void 0, void 0, function () {
+exports.setupUnknownRepoProvider = function (ui) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         ui.say("In order to get the most out of Danger, I'd recommend giving it the ability to post in");
         ui.say("the code-review comment section.");
@@ -46,7 +46,7 @@ exports.setupUnknownRepoProvider = function (ui) { return __awaiter(void 0, void
         return [2 /*return*/];
     });
 }); };
-exports.setupAzureDevopsAccount = function (ui, state) { return __awaiter(void 0, void 0, void 0, function () {
+exports.setupAzureDevopsAccount = function (ui, state) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -73,7 +73,7 @@ exports.setupAzureDevopsAccount = function (ui, state) { return __awaiter(void 0
         }
     });
 }); };
-exports.setupGithubAccount = function (ui, state) { return __awaiter(void 0, void 0, void 0, function () {
+exports.setupGithubAccount = function (ui, state) { return __awaiter(_this, void 0, void 0, function () {
     var flickr, googImages;
     return __generator(this, function (_a) {
         switch (_a.label) {

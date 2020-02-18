@@ -1,11 +1,10 @@
 #! /usr/bin/env node
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -46,6 +45,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var chalk_1 = __importDefault(require("chalk"));
 var commander_1 = __importDefault(require("commander"));
@@ -67,7 +67,7 @@ commander_1.default
 });
 commander_1.default.parse(process.argv);
 var app = commander_1.default;
-var go = function (app) { return __awaiter(void 0, void 0, void 0, function () {
+var go = function (app) { return __awaiter(_this, void 0, void 0, function () {
     var state, ui, isOSS;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -109,7 +109,7 @@ var showNonGitHubWarning = function (ui) {
     var link = ui.link("danger/danger-js#/source/commands/danger-init.ts", "https://github.com/danger/danger-js/blob/master/source/commands/danger-init.ts");
     ui.say("\n > " + link + "\n");
 };
-var showTodoState = function (ui) { return __awaiter(void 0, void 0, void 0, function () {
+var showTodoState = function (ui) { return __awaiter(_this, void 0, void 0, function () {
     var isOSS;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -142,7 +142,7 @@ var showTodoState = function (ui) { return __awaiter(void 0, void 0, void 0, fun
         }
     });
 }); };
-var setupDangerfile = function (ui, state) { return __awaiter(void 0, void 0, void 0, function () {
+var setupDangerfile = function (ui, state) { return __awaiter(_this, void 0, void 0, function () {
     var content;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -175,7 +175,7 @@ var setupDangerfile = function (ui, state) { return __awaiter(void 0, void 0, vo
         }
     });
 }); };
-var setupBotAccount = function (ui, state) { return __awaiter(void 0, void 0, void 0, function () {
+var setupBotAccount = function (ui, state) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         if (state.repoType == "github") {
             setup_bot_account_1.setupGithubAccount(ui, state);
@@ -189,7 +189,7 @@ var setupBotAccount = function (ui, state) { return __awaiter(void 0, void 0, vo
         return [2 /*return*/];
     });
 }); };
-var setupGHAccessToken = function (ui, state) { return __awaiter(void 0, void 0, void 0, function () {
+var setupGHAccessToken = function (ui, state) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -232,7 +232,7 @@ var setupGHAccessToken = function (ui, state) { return __awaiter(void 0, void 0,
         }
     });
 }); };
-var wrapItUp = function (ui, _state) { return __awaiter(void 0, void 0, void 0, function () {
+var wrapItUp = function (ui, _state) { return __awaiter(_this, void 0, void 0, function () {
     var link;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -264,7 +264,7 @@ var wrapItUp = function (ui, _state) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); };
-var addToCI = function (ui, state) { return __awaiter(void 0, void 0, void 0, function () {
+var addToCI = function (ui, state) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -297,7 +297,7 @@ var addToCI = function (ui, state) { return __awaiter(void 0, void 0, void 0, fu
         }
     });
 }); };
-var thanks = function (ui, _state) { return __awaiter(void 0, void 0, void 0, function () {
+var thanks = function (ui, _state) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:

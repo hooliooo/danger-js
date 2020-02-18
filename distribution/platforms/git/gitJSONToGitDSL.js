@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -45,6 +44,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var os = __importStar(require("os"));
 var parse_diff_1 = __importDefault(require("parse-diff"));
@@ -68,7 +68,7 @@ exports.gitJSONToGitDSL = function (gitJSONRep, config) {
      *
      * @param filename The path of the file
      */
-    var JSONPatchForFile = function (filename) { return __awaiter(void 0, void 0, void 0, function () {
+    var JSONPatchForFile = function (filename) { return __awaiter(_this, void 0, void 0, function () {
         var baseFile, headFile, baseJSON, headJSON;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -107,7 +107,7 @@ exports.gitJSONToGitDSL = function (gitJSONRep, config) {
      *
      * @param filename path of the file
      */
-    var JSONDiffForFile = function (filename) { return __awaiter(void 0, void 0, void 0, function () {
+    var JSONDiffForFile = function (filename) { return __awaiter(_this, void 0, void 0, function () {
         var patchObject, diff, before, after;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -161,7 +161,7 @@ exports.gitJSONToGitDSL = function (gitJSONRep, config) {
             }
         });
     }); };
-    var linesOfCode = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var linesOfCode = function () { return __awaiter(_this, void 0, void 0, function () {
         var _a, createdFilesDiffs, modifiedFilesDiffs, deletedFilesDiffs, additions, deletions, modifiedLines;
         return __generator(this, function (_b) {
             switch (_b.label) {
@@ -201,7 +201,7 @@ exports.gitJSONToGitDSL = function (gitJSONRep, config) {
      *
      * @param filename File path for the diff
      */
-    var structuredDiffForFile = function (filename) { return __awaiter(void 0, void 0, void 0, function () {
+    var structuredDiffForFile = function (filename) { return __awaiter(_this, void 0, void 0, function () {
         var fileDiffs, diff, structuredDiff;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -233,7 +233,7 @@ exports.gitJSONToGitDSL = function (gitJSONRep, config) {
      *
      * @param filename File path for the diff
      */
-    var diffForFile = function (filename) { return __awaiter(void 0, void 0, void 0, function () {
+    var diffForFile = function (filename) { return __awaiter(_this, void 0, void 0, function () {
         var structuredDiff, allLines, _a;
         return __generator(this, function (_b) {
             switch (_b.label) {

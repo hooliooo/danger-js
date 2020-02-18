@@ -1,4 +1,4 @@
-import { Env, CISource } from "../ci_source";
+import { Env, CISource } from "../ci_source"
 /**
  * ### CI Setup
  *  <!-- JS --!>
@@ -39,14 +39,14 @@ import { Env, CISource } from "../ci_source";
  *  You should make sure to check the case "Expose for Pull Requests?".
  */
 export declare class Bitrise implements CISource {
-    private readonly env;
-    constructor(env: Env);
-    get name(): string;
-    get isCI(): boolean;
-    get isPR(): boolean;
-    private _parseRepoURL;
-    get pullRequestID(): string;
-    get repoSlug(): string;
-    get ciRunURL(): any;
-    get commitHash(): any;
+  private readonly env
+  constructor(env: Env)
+  readonly name: string
+  readonly isCI: boolean
+  readonly isPR: boolean
+  private _parseRepoURL
+  readonly pullRequestID: string
+  readonly repoSlug: string
+  readonly ciRunURL: any
+  readonly commitHash: any
 }

@@ -11,11 +11,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -46,6 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var DangerResults_1 = require("../../../../dsl/DangerResults");
 var githubIssueTemplate_1 = require("../../../../runner/templates/githubIssueTemplate");
@@ -53,8 +53,9 @@ var debug_1 = require("../../../../debug");
 var d = debug_1.debug("GitHub::ResultsToCheck");
 exports.resultsToCheck = function (results, options, pr, api, ciCommitHash, name) {
     if (name === void 0) { name = "Danger"; }
-    return __awaiter(void 0, void 0, void 0, function () {
+    return __awaiter(_this, void 0, void 0, function () {
         var repo, hasFails, hasWarnings, mainResults, annotationResults, commitID, mainBody, getBlobUrlForPath, annotations, isEmpty;
+        var _this = this;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -65,7 +66,7 @@ exports.resultsToCheck = function (results, options, pr, api, ciCommitHash, name
                     annotationResults = DangerResults_1.inlineResults(results);
                     commitID = ciCommitHash || pr.head.sha;
                     mainBody = githubIssueTemplate_1.template(options.dangerID, mainResults, commitID);
-                    getBlobUrlForPath = function (path) { return __awaiter(void 0, void 0, void 0, function () {
+                    getBlobUrlForPath = function (path) { return __awaiter(_this, void 0, void 0, function () {
                         var data, error_1;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
@@ -114,7 +115,7 @@ exports.resultsToCheck = function (results, options, pr, api, ciCommitHash, name
         });
     });
 };
-var inlineResultsToAnnotations = function (results, _options, getBlobUrlForPath) { return __awaiter(void 0, void 0, void 0, function () {
+var inlineResultsToAnnotations = function (results, _options, getBlobUrlForPath) { return __awaiter(_this, void 0, void 0, function () {
     var inlineResults, annotations, _loop_1, _i, inlineResults_1, perFileResults;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -136,16 +137,16 @@ var inlineResultsToAnnotations = function (results, _options, getBlobUrlForPath)
                                     _a.end_line = perFileResults.line || 0,
                                     _a);
                                 perFileResults.fails.forEach(function (message) {
-                                    annotations.push(__assign(__assign({}, fileAnnotation), { annotation_level: "failure", message: message }));
+                                    annotations.push(__assign({}, fileAnnotation, { annotation_level: "failure", message: message }));
                                 });
                                 perFileResults.warnings.forEach(function (message) {
-                                    annotations.push(__assign(__assign({}, fileAnnotation), { annotation_level: "warning", message: message }));
+                                    annotations.push(__assign({}, fileAnnotation, { annotation_level: "warning", message: message }));
                                 });
                                 perFileResults.messages.forEach(function (message) {
-                                    annotations.push(__assign(__assign({}, fileAnnotation), { annotation_level: "notice", message: message }));
+                                    annotations.push(__assign({}, fileAnnotation, { annotation_level: "notice", message: message }));
                                 });
                                 perFileResults.markdowns.forEach(function (message) {
-                                    annotations.push(__assign(__assign({}, fileAnnotation), { annotation_level: "notice", message: message }));
+                                    annotations.push(__assign({}, fileAnnotation, { annotation_level: "notice", message: message }));
                                 });
                                 return [2 /*return*/];
                         }

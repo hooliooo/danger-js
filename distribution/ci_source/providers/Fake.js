@@ -18,7 +18,7 @@ var FakeCI = /** @class */ (function () {
             repo: env.DANGER_TEST_REPO || "artsy/emission",
             pr: env.DANGER_TEST_PR || "327",
         };
-        this.env = __assign(__assign({}, env), defaults);
+        this.env = __assign({}, env, defaults);
     }
     Object.defineProperty(FakeCI.prototype, "name", {
         get: function () {

@@ -1,10 +1,9 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -45,6 +44,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = __importStar(require("fs"));
 var debug_1 = require("../../debug");
@@ -67,7 +67,7 @@ function createDangerfileRuntimeEnvironment(dangerfileContext) {
     });
 }
 exports.createDangerfileRuntimeEnvironment = createDangerfileRuntimeEnvironment;
-var runAllScheduledTasks = function (results) { return __awaiter(void 0, void 0, void 0, function () {
+var runAllScheduledTasks = function (results) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -102,7 +102,7 @@ var runAllScheduledTasks = function (results) { return __awaiter(void 0, void 0,
  * @param {func | undefined} moduleHandler an optional func for handling module resolution
  * @returns {DangerResults} the results of the run
  */
-exports.runDangerfileEnvironment = function (filenames, originalContents, environment, injectedObjectToExport, moduleHandler) { return __awaiter(void 0, void 0, void 0, function () {
+exports.runDangerfileEnvironment = function (filenames, originalContents, environment, injectedObjectToExport, moduleHandler) { return __awaiter(_this, void 0, void 0, function () {
     var customModuleHandler, customRequire, _i, filenames_1, filename, index, originalContent, content, compiled, key, element, optionalExport, error_1, errorResults, results;
     return __generator(this, function (_a) {
         switch (_a.label) {

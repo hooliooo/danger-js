@@ -11,11 +11,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -49,6 +48,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var debug_1 = require("../../debug");
 var json5_1 = __importDefault(require("json5"));
@@ -71,13 +71,13 @@ exports.localGetCommits = function (base, head) {
         var args = ["log", base + "..." + head, "--pretty=format:" + exports.formatJSON];
         var child = child_process_1.spawn("git", args, { env: process.env });
         d("> git", args.join(" "));
-        child.stdout.on("data", function (data) { return __awaiter(void 0, void 0, void 0, function () {
+        child.stdout.on("data", function (data) { return __awaiter(_this, void 0, void 0, function () {
             var asJSONString, commits, realCommits;
             return __generator(this, function (_a) {
                 data = data.toString();
                 asJSONString = "[" + data.substring(0, data.length - 1) + "]";
                 commits = json5_1.default.parse(asJSONString);
-                realCommits = commits.map(function (c) { return (__assign(__assign({}, c), { parents: c.parents.split(" ") })); });
+                realCommits = commits.map(function (c) { return (__assign({}, c, { parents: c.parents.split(" ") })); });
                 done(realCommits);
                 return [2 /*return*/];
             });
