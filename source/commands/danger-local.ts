@@ -19,6 +19,7 @@ program
   // TODO: this option
   // .option("-s, --staging", "Just use staged changes.")
   .description("Runs danger without PR metadata, useful for git hooks.")
+  .option("-b, --base [branch_name]", "Use a different base branch")
 setSharedArgs(program).parse(process.argv)
 
 const app = (program as any) as App
@@ -32,6 +33,6 @@ localPlatform.validateThereAreChanges().then(changes => {
     // try to find the CI danger is running on and use that.
     runRunner(app, { source: fakeSource, platform: localPlatform, additionalEnvVars: { DANGER_LOCAL_NO_CI: "yep" } })
   } else {
-    console.log("No git changes detected between head and master.")
+    console.log(`No git changes detected between head and ${base}.`)
   }
 })
